@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:loginui/fb_login.dart';
 import 'package:loginui/google_login.dart';
+import 'package:loginui/social_login.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -9,6 +10,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -143,6 +145,8 @@ class _LoginPageState extends State<LoginPage> {
 
                             GestureDetector(
                               onTap: () {
+
+
 
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => FbLogin()));
 
