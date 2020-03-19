@@ -3,9 +3,9 @@ import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as JSON;
+import 'package:loginui/models/user_model.dart';
 
-import 'package:loginui/login_page.dart';
-import 'package:loginui/user_model.dart';
+import 'login_page.dart';
 
 
 
@@ -54,13 +54,6 @@ class _SocialLoginState extends State<SocialLogin> {
 
   }
 
-
-
-
-
-
-
-
   _loginWithGoogle() async{
     try{
       await _googleSignIn.signIn();
@@ -104,3 +97,4 @@ class _SocialLoginState extends State<SocialLogin> {
     );
   }
 }
+

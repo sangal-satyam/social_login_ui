@@ -1,15 +1,36 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:loginui/fb_login.dart';
-import 'package:loginui/google_login.dart';
-import 'package:loginui/social_login.dart';
+import 'package:loginui/auth/auth.dart';
+//import 'package:loginui/fb_login.dart';
+//import 'package:loginui/google_login.dart';
+import 'package:loginui/screens/social_login.dart';
+
+
 
 class LoginPage extends StatefulWidget {
+
+//  final Function fbLogin;
+//  final Function googleLogin;
+//
+//  const LoginPage({Key key, this.fbLogin, this.googleLogin}) : super(key: key);
+
+
+
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  final AuthService _auth = AuthService();
+
+  // text field state
+  String email = '';
+  String password = '';
+
+
+  SocialLogin _socialLogin = SocialLogin();
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +78,9 @@ class _LoginPageState extends State<LoginPage> {
                               borderSide: BorderSide(color : Colors.red)
                             )
                           ),
+                          onChanged: (val) {
+                            setState(() => email = val);
+                          },
                         ),
                         SizedBox(
                           height: 20,
@@ -73,6 +97,9 @@ class _LoginPageState extends State<LoginPage> {
                                   borderSide: BorderSide(color : Colors.red),
                               )
                           ),
+                          onChanged: (val) {
+                            setState(() => password= val);
+                          },
                         ),
                         SizedBox(
                           height: 20,
@@ -89,7 +116,10 @@ class _LoginPageState extends State<LoginPage> {
                           height: 20,
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () async {
+                            print(email);
+                            print(password);
+                          },
                           child: Container(
                             height: 40,
                             width: 270,
@@ -146,9 +176,11 @@ class _LoginPageState extends State<LoginPage> {
                             GestureDetector(
                               onTap: () {
 
+                               // _socialLogin.
 
+                               // widget.fbLogin();
 
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => FbLogin()));
+                                //Navigator.push(context, MaterialPageRoute(builder: (context) => FbLogin()));
 
                               },
                               child: Container(
@@ -182,7 +214,9 @@ class _LoginPageState extends State<LoginPage> {
                             GestureDetector(
                               onTap: () {
 
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => GoogleLogin()));
+                              //  widget.googleLogin();
+
+                                //Navigator.push(context, MaterialPageRoute(builder: (context) => GoogleLogin()));
 
                               },
                               child: Container(

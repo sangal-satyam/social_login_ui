@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:loginui/login_page.dart';
+import 'package:loginui/screens/register.dart';
+
+import 'login_page.dart';
 class ChooseScreen extends StatefulWidget {
   @override
   _ChooseScreenState createState() => _ChooseScreenState();
@@ -48,10 +50,17 @@ class _ChooseScreenState extends State<ChooseScreen> {
                       ],
                     ),
 
+
+
                     Column(
                       children: <Widget>[
                         GestureDetector(
-                          onTap: (){},
+                          onTap: (){
+
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Register()));
+
+
+                          },
                           child: Container(
                             height: 40,
                             width: 270,
