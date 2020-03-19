@@ -50,7 +50,7 @@ class _ChooseScreenState extends State<ChooseScreen> {
                       ],
                     ),
 
-
+                     SizedBox(height: 20,),
 
                     Column(
                       children: <Widget>[
