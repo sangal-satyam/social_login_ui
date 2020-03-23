@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
-import '../auth/auth.dart';
+import '../../auth/auth.dart';
 
 class Register extends StatefulWidget {
   @override

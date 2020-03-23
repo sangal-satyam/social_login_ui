@@ -5,7 +5,7 @@ import 'package:loginui/auth/auth.dart';
 import 'package:loginui/screens/dashboard/dashboard.dart';
 //import 'package:loginui/fb_login.dart';
 //import 'package:loginui/google_login.dart';
-import 'package:loginui/screens/social_login.dart';
+import 'package:loginui/screens/logIn/social_login.dart';
 import 'package:toast/toast.dart';
 
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:loginui/screens/register.dart';
+import 'package:loginui/screens/logIn/register.dart';
 
-import 'login_page.dart';
+import 'logIn/login_page.dart';
 class ChooseScreen extends StatefulWidget {
   @override
   _ChooseScreenState createState() => _ChooseScreenState();

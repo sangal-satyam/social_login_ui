@@ -1,11 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:loginui/auth/auth.dart';
-import 'package:loginui/screens/dashboard/bottomapp_data_page.dart';
 import 'package:loginui/screens/dashboard/users_view_page.dart';
 import 'package:loginui/screens/todo/todo_view_page.dart';
 
 import 'custom_card_widget.dart';
+import 'notification_view_page.dart';
 
 class Dashboard extends StatefulWidget {
 
@@ -19,6 +18,8 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   final AuthService _auth = AuthService();
+
+  var widgetDecider;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,11 +32,34 @@ class _DashboardState extends State<Dashboard> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              IconButton(icon: Icon(Icons.insert_drive_file,size: 30,color: Colors.black54,), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>TodoViewPage(user: widget.user)))),
-              IconButton(icon: Icon(Icons.notifications_none,size: 30,color: Colors.black54,), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomAppDataPage(bottomAppText: 'Notifications',)))),
-              IconButton(icon: Icon(Icons.search,size: 30,color: Colors.black54,), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomAppDataPage(bottomAppText: 'Search',)))),
-              IconButton(icon: Icon(Icons.person_outline,size: 30,color: Colors.black54,), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>UsersViewPage()))),
-              IconButton(icon: Icon(Icons.message,size: 30,color: Colors.black54,), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomAppDataPage(bottomAppText: 'Messages',)))),
+              IconButton(icon: Icon(Icons.insert_drive_file,size: 30,color: Colors.black54,), onPressed: (){
+                setState(() {
+                  widgetDecider = 'tasksView';
+                });
+              } ),
+              //IconButton(icon: Icon(Icons.notifications_none,size: 30,color: Colors.black54,), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomAppDataPage(bottomAppText: 'Notifications',)))),
+              IconButton(icon: Icon(Icons.notifications_none,size: 30,color: Colors.black54,), onPressed: (){
+                setState(() {
+                  widgetDecider = 'notificationView';
+                });
+              } ),
+              //IconButton(icon: Icon(Icons.search,size: 30,color: Colors.black54,), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomAppDataPage(bottomAppText: 'Search',)))),
+              IconButton(icon: Icon(Icons.search,size: 30,color: Colors.black54,), onPressed: () {
+                setState(() {
+                  widgetDecider = 'searchView';
+                });
+              } ),
+              IconButton(icon: Icon(Icons.person_outline,size: 30,color: Colors.black54,), onPressed: (){
+                setState(() {
+                  widgetDecider = 'usersView';
+                });
+              }),
+              //IconButton(icon: Icon(Icons.message,size: 30,color: Colors.black54,), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomAppDataPage(bottomAppText: 'Messages',)))),
+              IconButton(icon: Icon(Icons.message,size: 30,color: Colors.black54,), onPressed: (){
+                setState(() {
+                  widgetDecider = 'messageView';
+                });
+                } ),
             ],
           ),
         ),
@@ -43,6 +67,7 @@ class _DashboardState extends State<Dashboard> {
 
       body: SafeArea(
         child: SingleChildScrollView(
+          physics: NeverScrollableScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: Column(
@@ -119,75 +144,24 @@ class _DashboardState extends State<Dashboard> {
                     ],
                   ),
                 ),
-                SizedBox(height: 20,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    CustomCardWidget(
-                      cardTitle: 'TICKETS',
-                      cardValue: 9,
-                      activeValue: 2,
-                      doneValue: 21,
-                      Customgradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [Colors.purple[900],Colors.purple[400]]
-                      ),
-                    ),
-                    CustomCardWidget(
-                      cardTitle: 'TASKS',
-                      cardValue: 12,
-                      activeValue: 4,
-                      doneValue: 9,
-                      Customgradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [Colors.blue[900],Colors.blue[400]]
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    CustomCardWidget(
-                      cardTitle: 'TEAMS',
-                      cardValue: 5,
-                      activeValue: 3,
-                      doneValue: 5,
-                      Customgradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [Colors.red[900],Colors.red[400]]
-                      ),
-                    ),
-                    CustomCardWidget(
-                      cardTitle: 'STATS',
-                      cardValue: 30,
-                      activeValue: 12,
-                      doneValue: 25,
-                      Customgradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [Colors.amber[900],Colors.amber[400]]
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20,),
-                CustomCardWidget(
-                  cardTitle: 'ENQURIES',
-                  cardValue: 10,
-                  activeValue: 16,
-                  doneValue: 14,
 
-                  Customgradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [Colors.green[900],Colors.green[400]]
-                  ),
-                ),
+
+
+                Container(
+                    height: 600,
+                    child: SingleChildScrollView(
+                        child: getCustomContainerBottomAppBar())),
+
+
+
+
+
+
+
+
+
+
+
               ],
             ),
           ),
@@ -197,11 +171,51 @@ class _DashboardState extends State<Dashboard> {
   }
 
 
+  Widget getCustomContainerBottomAppBar() {
+    switch (widgetDecider) {
+      case 'notificationView':
+        return notification();
+      case 'searchView':
+        return search();
+      case 'messageView':
+        return messages();
+      case 'tasksView':
+        return tasks();
+      case 'usersView':
+        return users();
+    }
+
+    return notification();
+  }
 
 
 
+  Widget notification() {
+    return NotificationViewPage();
+  }
+
+  Widget search() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 40),
+      child: Text('Search',style: TextStyle(color: Colors.black,fontSize: 40),),
+    );
+  }
+
+  Widget messages() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 40),
+      child: Text('Messages',style: TextStyle(color: Colors.black,fontSize: 40),),
+    );
+  }
 
 
+  Widget tasks() {
+    return TodoViewPage(user: widget.user);
+  }
+
+  Widget users() {
+    return UsersViewPage();
+  }
 
 
 

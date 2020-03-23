@@ -17,23 +17,28 @@ class TodoViewPage extends StatefulWidget {
 class _TodoViewPageState extends State<TodoViewPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        elevation: 0,
-        iconTheme: IconThemeData(
-          color: Colors.white, //change your color here
-        ),
+    return
+//
+//    Scaffold(
+//      backgroundColor: Colors.black,
+//      appBar: AppBar(
+//        backgroundColor: Colors.black,
+//        elevation: 0,
+//        iconTheme: IconThemeData(
+//          color: Colors.white, //change your color here
+//        ),
+//
+//        actions: <Widget>[
+//          IconButton(icon: Icon(Icons.add), onPressed:()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> AddTodoPage(user: widget.user))))
+//        ],
+//
+//        title: Text('TASKS',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+//      ),
+    //  body:
 
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.add), onPressed:()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> AddTodoPage(user: widget.user))))
-        ],
-
-        title: Text('TASKS',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-      ),
-      body: Center(
+    Center(
         child: Container(
+          height: 600,
             child: StreamBuilder<QuerySnapshot>(
               stream: Firestore.instance.collection('users').document(widget.user).collection('tasks')
                   .snapshots(),
@@ -70,7 +75,7 @@ class _TodoViewPageState extends State<TodoViewPage> {
                 }
               },
             )),
-      ),
-    );
+      );
+    //);
   }
 }

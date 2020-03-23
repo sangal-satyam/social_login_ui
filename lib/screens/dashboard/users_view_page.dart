@@ -9,20 +9,17 @@ class UsersViewPage extends StatefulWidget {
 class _UsersViewPageState extends State<UsersViewPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        elevation: 0,
-        iconTheme: IconThemeData(
-          color: Colors.white, //change your color here
-        ),
+    return
+
+//      Scaffold(
+//      backgroundColor: Colors.black,
+//
+      //body:
 
 
-        title: Text('USERS',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-      ),
-      body: Center(
+      Center(
         child: Container(
+          height: 600,
             child: StreamBuilder<QuerySnapshot>(
               stream: Firestore.instance.collection('users')
                   .snapshots(),
@@ -61,7 +58,7 @@ class _UsersViewPageState extends State<UsersViewPage> {
                 }
               },
             )),
-      ),
-    );
+      );
+   // );
   }
 }
