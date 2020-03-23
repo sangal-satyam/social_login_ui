@@ -47,10 +47,13 @@ class _RegisterState extends State<Register> {
                   child: Column(
                     //mainAxisAlignment: MainAxisAlignment,
                     children: <Widget>[
-                      Icon(
-                        Icons.favorite,
-                        size: 70,
-                        color: Colors.red,
+                      Hero(
+                        tag: 1,
+                        child: Icon(
+                          Icons.favorite,
+                          size: 70,
+                          color: Colors.red,
+                        ),
                       ),
 
                       SizedBox(height: 80,),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loginui/screens/choose_screen.dart';
 import 'package:loginui/models/user_model.dart';
+import 'package:loginui/screens/dashboard/dashboard.dart';
 import 'package:provider/provider.dart';
 import 'home.dart';
 
@@ -15,7 +16,7 @@ class Wrapper extends StatelessWidget {
     if (user == null){
       return ChooseScreen();
     } else {
-      return Home();
+      return Dashboard();
     }
 
   }

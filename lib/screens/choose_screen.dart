@@ -37,7 +37,14 @@ class _ChooseScreenState extends State<ChooseScreen> {
                   children: <Widget>[
                     Column(
                       children: <Widget>[
-                        Icon(Icons.favorite,size: 60,color: Colors.white,),
+                        Hero(
+                          tag: 1,
+                          child: Icon(
+                            Icons.favorite,
+                            size: 60,
+                            color: Colors.white,
+                          ),
+                        ),
                         RichText(
                           text: TextSpan(
                               text: '',

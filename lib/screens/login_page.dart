@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:loginui/auth/auth.dart';
+import 'package:loginui/screens/dashboard/dashboard.dart';
 //import 'package:loginui/fb_login.dart';
 //import 'package:loginui/google_login.dart';
 import 'package:loginui/screens/social_login.dart';
+import 'package:toast/toast.dart';
 
 
 
@@ -28,6 +31,7 @@ class _LoginPageState extends State<LoginPage> {
   // text field state
   String email = '';
   String password = '';
+  String error = '';
 
 
   SocialLogin _socialLogin = SocialLogin();
@@ -56,10 +60,13 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Icon(
-                      Icons.favorite,
-                      size: 70,
-                      color: Colors.red,
+                    Hero(
+                      tag: 1,
+                      child: Icon(
+                        Icons.favorite,
+                        size: 70,
+                        color: Colors.red,
+                      ),
                     ),
 
                     SizedBox(height: 5,),
@@ -117,8 +124,17 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         GestureDetector(
                           onTap: () async {
-                            print(email);
-                            print(password);
+
+                            dynamic result = await _auth.signInWithEmailPassword(email, password);
+                            if(result == null) {
+                              setState(() {
+                                error = 'Please supply a valid email';
+                              });
+                            }
+                            else{
+                              showToast('Welcome');
+                              Navigator.pop(context);
+                            }
                           },
                           child: Container(
                             height: 40,
@@ -260,4 +276,9 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
+  void showToast(String msg, {int duration, int gravity}) {
+    Toast.show(msg, context, duration: duration, gravity: gravity);
+  }
+
 }

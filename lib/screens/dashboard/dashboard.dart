@@ -1,13 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:loginui/auth/auth.dart';
+import 'package:loginui/screens/dashboard/bottomapp_data_page.dart';
+import 'package:loginui/screens/dashboard/users_view_page.dart';
 
 import 'custom_card_widget.dart';
 
 class Dashboard extends StatefulWidget {
+
+
+
   @override
   _DashboardState createState() => _DashboardState();
 }
 
 class _DashboardState extends State<Dashboard> {
+  final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,11 +28,11 @@ class _DashboardState extends State<Dashboard> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              IconButton(icon: Icon(Icons.insert_drive_file,size: 30,color: Colors.black54,), onPressed: () {},),
-              IconButton(icon: Icon(Icons.notifications_none,size: 30,color: Colors.black54,), onPressed: () {},),
-              IconButton(icon: Icon(Icons.search,size: 30,color: Colors.black54,), onPressed: () {},),
-              IconButton(icon: Icon(Icons.person_outline,size: 30,color: Colors.black54,), onPressed: () {},),
-              IconButton(icon: Icon(Icons.message,size: 30,color: Colors.black54,), onPressed: () {},),
+              IconButton(icon: Icon(Icons.insert_drive_file,size: 30,color: Colors.black54,), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomAppDataPage(bottomAppText: 'Files',)))),
+              IconButton(icon: Icon(Icons.notifications_none,size: 30,color: Colors.black54,), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomAppDataPage(bottomAppText: 'Notifications',)))),
+              IconButton(icon: Icon(Icons.search,size: 30,color: Colors.black54,), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomAppDataPage(bottomAppText: 'Search',)))),
+              IconButton(icon: Icon(Icons.person_outline,size: 30,color: Colors.black54,), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>UsersViewPage()))),
+              IconButton(icon: Icon(Icons.message,size: 30,color: Colors.black54,), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomAppDataPage(bottomAppText: 'Messages',)))),
             ],
           ),
         ),
@@ -46,7 +54,30 @@ class _DashboardState extends State<Dashboard> {
                     Text('trusfi',style: TextStyle(color: Colors.blue[900],fontWeight: FontWeight.bold,fontSize: 30),),
                     IconButton(
                       icon: Icon(Icons.more_vert,color: Colors.blue[900],size: 30),
-                      onPressed: (){},
+                      onPressed: (){
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            // return object of type Dialog
+                            return AlertDialog(
+                              content: GestureDetector(
+                                onTap: ()async {
+                                  await _auth.signOut();
+                                  Navigator.pop(context);
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Icon(Icons.power_settings_new),
+                                    SizedBox(width: 10,),
+                                    new Text("LOGOUT"),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -161,4 +192,14 @@ class _DashboardState extends State<Dashboard> {
       ),
     );
   }
+
+
+
+
+
+
+
+
+
+
 }
