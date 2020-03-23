@@ -17,10 +17,12 @@ class _RegisterState extends State<Register> {
   // text field state
   String email = '';
   String password = '';
+  String employeeId = '';
   String name = '';
   String gender = '';
   int mobile;
   int age;
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +64,23 @@ class _RegisterState extends State<Register> {
                         key: _formKey,
                         child: Column(
                           children: <Widget>[
+                            TextFormField(
+                              decoration: InputDecoration(
+                                  labelText: 'Employee Id',
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.red)),
+                                  labelStyle: TextStyle(
+                                      color: Colors.red, fontWeight: FontWeight.bold),
+                                  hintText: 'Employee Id',
+                                  focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(color : Colors.red)
+                                  )
+                              ),
+                              validator: (val) => val.isEmpty ? 'Enter a Employee Id' : null,
+                              onChanged: (val) {
+                                setState(() => employeeId = val);
+                              },
+                            ),
                             TextFormField(
                               decoration: InputDecoration(
                                   labelText: 'NAME',
@@ -192,7 +211,7 @@ class _RegisterState extends State<Register> {
                             GestureDetector(
                               onTap: () async {
                                 if(_formKey.currentState.validate()){
-                                  dynamic result = await _auth.registerWithEmailAndPassword(email, password,name,gender,mobile,age);
+                                  dynamic result = await _auth.registerWithEmailAndPassword(email, password,employeeId,name,gender,mobile,age);
                                   if(result == null) {
                                     setState(() {
                                       error = 'Please supply a valid email';

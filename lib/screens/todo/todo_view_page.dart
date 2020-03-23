@@ -1,12 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:loginui/models/user_model.dart';
+import 'package:loginui/screens/todo/add_todo.dart';
 
-class UsersViewPage extends StatefulWidget {
+class TodoViewPage extends StatefulWidget {
+  final String user;
+
+  const TodoViewPage({Key key, this.user}) : super(key: key);
+
+
+
   @override
-  _UsersViewPageState createState() => _UsersViewPageState();
+  _TodoViewPageState createState() => _TodoViewPageState();
 }
 
-class _UsersViewPageState extends State<UsersViewPage> {
+class _TodoViewPageState extends State<TodoViewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,13 +26,16 @@ class _UsersViewPageState extends State<UsersViewPage> {
           color: Colors.white, //change your color here
         ),
 
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.add), onPressed:()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> AddTodoPage(user: widget.user))))
+        ],
 
-        title: Text('USERS',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+        title: Text('TASKS',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
       ),
       body: Center(
         child: Container(
             child: StreamBuilder<QuerySnapshot>(
-              stream: Firestore.instance.collection('users')
+              stream: Firestore.instance.collection('users').document(widget.user).collection('tasks')
                   .snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -42,18 +53,16 @@ class _UsersViewPageState extends State<UsersViewPage> {
                           return new Card(
                             elevation: 10,
                             child: Padding(
-                            padding: const EdgeInsets.all(20),
-                            child: Column(
-                              children: <Widget>[
-                                Text(document['name'],style: TextStyle(fontWeight: FontWeight.bold),),
-                                Text(document['age'].toString()),
-                                Text(document['gender']),
-                                Text(document['mobile'].toString()),
-                                Text(document['email']),
+                              padding: const EdgeInsets.all(20),
+                              child: Column(
+                                children: <Widget>[
+                                  Text(document['taskName'],style: TextStyle(fontWeight: FontWeight.bold),),
+                                  Text(document['taskDescription']),
+                                  Text(document['taskDueDate']),
 
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
                           );
                         }).toList(),
                       ),

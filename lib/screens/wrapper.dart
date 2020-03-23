@@ -10,13 +10,12 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final user = Provider.of<User>(context);
-    print(user);
 
     // return either the Home or Authenticate widget
     if (user == null){
       return ChooseScreen();
     } else {
-      return Dashboard();
+      return Dashboard(user: user.uid.toString());
     }
 
   }

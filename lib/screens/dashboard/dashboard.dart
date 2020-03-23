@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:loginui/auth/auth.dart';
 import 'package:loginui/screens/dashboard/bottomapp_data_page.dart';
 import 'package:loginui/screens/dashboard/users_view_page.dart';
+import 'package:loginui/screens/todo/todo_view_page.dart';
 
 import 'custom_card_widget.dart';
 
 class Dashboard extends StatefulWidget {
 
+  final String user;
 
+  const Dashboard({Key key, this.user}) : super(key: key);
 
   @override
   _DashboardState createState() => _DashboardState();
@@ -28,7 +31,7 @@ class _DashboardState extends State<Dashboard> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              IconButton(icon: Icon(Icons.insert_drive_file,size: 30,color: Colors.black54,), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomAppDataPage(bottomAppText: 'Files',)))),
+              IconButton(icon: Icon(Icons.insert_drive_file,size: 30,color: Colors.black54,), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>TodoViewPage(user: widget.user)))),
               IconButton(icon: Icon(Icons.notifications_none,size: 30,color: Colors.black54,), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomAppDataPage(bottomAppText: 'Notifications',)))),
               IconButton(icon: Icon(Icons.search,size: 30,color: Colors.black54,), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomAppDataPage(bottomAppText: 'Search',)))),
               IconButton(icon: Icon(Icons.person_outline,size: 30,color: Colors.black54,), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>UsersViewPage()))),

@@ -2,13 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../models/user_model.dart';
 
+
 class AuthService {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   // create user obj based on firebase user
   User _userFromFirebaseUser(FirebaseUser user) {
-    return user != null ? User(uid: user.uid) : null;
+    return user != null ? User(uid: user.email) : null;
   }
 
   // auth change user stream
@@ -31,17 +32,28 @@ class AuthService {
   }
 
   // register with email and password
-  Future registerWithEmailAndPassword(String email, String password,String name, String gender, int mobile, int age) async {
+  Future registerWithEmailAndPassword(String email, String password,String employeeId,String name, String gender, int mobile, int age) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
-      Firestore.instance.collection('users').document(user.email).setData({"name": name, "email":email, "gender":gender, "age":age, "mobile": mobile,});
+      Firestore.instance.collection('users').document(user.email).setData({"employeeId": employeeId,"name": name, "email":email, "gender":gender, "age":age, "mobile": mobile,});
       return _userFromFirebaseUser(user);
     } catch (error) {
       print(error.toString());
       return null;
     }
   }
+
+//  Future addTask(String taskName, String taskDescription, String taskDueDate) async{
+//    try{
+//      Firest
+//    }
+//  }
+
+
+
+
+
 
   // sign out
   Future signOut() async {
