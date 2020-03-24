@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:loginui/screens/dashboard/users_profile_view_page.dart';
 
 class UsersViewPage extends StatefulWidget {
   @override
@@ -36,21 +37,24 @@ class _UsersViewPageState extends State<UsersViewPage> {
                       child: new ListView(
                         children: snapshot.data.documents
                             .map((DocumentSnapshot document) {
-                          return new Card(
-                            elevation: 10,
-                            child: Padding(
-                            padding: const EdgeInsets.all(20),
-                            child: Column(
-                              children: <Widget>[
-                                Text(document['name'],style: TextStyle(fontWeight: FontWeight.bold),),
-                                Text(document['age'].toString()),
-                                Text(document['gender']),
-                                Text(document['mobile'].toString()),
-                                Text(document['email']),
+                          return GestureDetector(
+                            onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>UsersProfileView(user: document['email']))),
+                            child: new Card(
+                              elevation: 10,
+                              child: Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Column(
+                                children: <Widget>[
+                                  Text(document['name'],style: TextStyle(fontWeight: FontWeight.bold),),
+                                  Text(document['age'].toString()),
+                                  Text(document['gender']),
+                                  Text(document['mobile'].toString()),
+                                  Text(document['email']),
 
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
+                            ),
                           );
                         }).toList(),
                       ),

@@ -32,11 +32,11 @@ class AuthService {
   }
 
   // register with email and password
-  Future registerWithEmailAndPassword(String email, String password,String employeeId,String name, String gender, int mobile, int age) async {
+  Future registerWithEmailAndPassword(String email, String password,String employeeId,String name, String gender, int mobile, int age, bool isAdmin) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
-      Firestore.instance.collection('users').document(user.email).setData({"employeeId": employeeId,"name": name, "email":email, "gender":gender, "age":age, "mobile": mobile,});
+      Firestore.instance.collection('users').document(user.email).setData({"employeeId": employeeId,"name": name, "email":email, "gender":gender, "age":age, "mobile": mobile,"isAdmin": isAdmin});
       return _userFromFirebaseUser(user);
     } catch (error) {
       print(error.toString());

@@ -22,7 +22,7 @@ class _RegisterState extends State<Register> {
   String gender = '';
   int mobile;
   int age;
-
+  bool isAdmin = false;
 
   @override
   Widget build(BuildContext context) {
@@ -211,7 +211,7 @@ class _RegisterState extends State<Register> {
                             GestureDetector(
                               onTap: () async {
                                 if(_formKey.currentState.validate()){
-                                  dynamic result = await _auth.registerWithEmailAndPassword(email, password,employeeId,name,gender,mobile,age);
+                                  dynamic result = await _auth.registerWithEmailAndPassword(email, password,employeeId,name,gender,mobile,age,isAdmin);
                                   if(result == null) {
                                     setState(() {
                                       error = 'Please supply a valid email';

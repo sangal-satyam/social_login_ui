@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:loginui/auth/auth.dart';
+import 'package:loginui/screens/dashboard/profile_view_page.dart';
 import 'package:loginui/screens/dashboard/users_view_page.dart';
-import 'package:loginui/screens/todo/todo_view_page.dart';
+
 
 import 'custom_card_widget.dart';
 import 'notification_view_page.dart';
@@ -27,7 +28,7 @@ class _DashboardState extends State<Dashboard> {
       bottomNavigationBar: BottomAppBar(
         elevation: 0,
         child: Padding(
-          padding: const EdgeInsets.only(top:10,bottom: 10),
+          padding: const EdgeInsets.only(top:5,bottom: 10),
           child: new Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -49,15 +50,15 @@ class _DashboardState extends State<Dashboard> {
                   widgetDecider = 'searchView';
                 });
               } ),
-              IconButton(icon: Icon(Icons.person_outline,size: 30,color: Colors.black54,), onPressed: (){
+              IconButton(icon: Icon(Icons.people,size: 30,color: Colors.black54,), onPressed: (){
                 setState(() {
                   widgetDecider = 'usersView';
                 });
               }),
               //IconButton(icon: Icon(Icons.message,size: 30,color: Colors.black54,), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomAppDataPage(bottomAppText: 'Messages',)))),
-              IconButton(icon: Icon(Icons.message,size: 30,color: Colors.black54,), onPressed: (){
+              IconButton(icon: Icon(Icons.person,size: 30,color: Colors.black54,), onPressed: (){
                 setState(() {
-                  widgetDecider = 'messageView';
+                  widgetDecider = 'profileView';
                 });
                 } ),
             ],
@@ -149,8 +150,7 @@ class _DashboardState extends State<Dashboard> {
 
                 Container(
                     height: 600,
-                    child: SingleChildScrollView(
-                        child: getCustomContainerBottomAppBar())),
+                    child: getCustomContainerBottomAppBar()),
 
 
 
@@ -177,8 +177,8 @@ class _DashboardState extends State<Dashboard> {
         return notification();
       case 'searchView':
         return search();
-      case 'messageView':
-        return messages();
+      case 'profileView':
+        return profile();
       case 'tasksView':
         return tasks();
       case 'usersView':
@@ -201,16 +201,22 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  Widget messages() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 40),
-      child: Text('Messages',style: TextStyle(color: Colors.black,fontSize: 40),),
-    );
+  Widget profile() {
+    return
+//    Padding(
+//      padding: const EdgeInsets.only(top: 40),
+//      child: Text('Profiles',style: TextStyle(color: Colors.black,fontSize: 40),),
+//    );
+
+      ProfileViewPage(user: widget.user);
   }
 
 
   Widget tasks() {
-    return TodoViewPage(user: widget.user);
+    return Padding(
+      padding: const EdgeInsets.only(top: 40),
+      child: Text('Files',style: TextStyle(color: Colors.black,fontSize: 40),),
+    );
   }
 
   Widget users() {
