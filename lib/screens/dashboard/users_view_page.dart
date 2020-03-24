@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:loginui/screens/dashboard/users_profile_view_page.dart';
 
 class UsersViewPage extends StatefulWidget {
+
+  final bool isAdmin;
+
+  const UsersViewPage({Key key, this.isAdmin}) : super(key: key);
+
   @override
   _UsersViewPageState createState() => _UsersViewPageState();
 }
@@ -38,7 +43,7 @@ class _UsersViewPageState extends State<UsersViewPage> {
                         children: snapshot.data.documents
                             .map((DocumentSnapshot document) {
                           return GestureDetector(
-                            onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>UsersProfileView(user: document['email']))),
+                            onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>UsersProfileView(user: document['email'],isAdmin:widget.isAdmin))),
                             child: new Card(
                               elevation: 10,
                               child: Padding(

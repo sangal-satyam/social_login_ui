@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:loginui/auth/auth.dart';
 import 'package:loginui/screens/dashboard/profile_view_page.dart';
@@ -20,6 +21,13 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   final AuthService _auth = AuthService();
 
+  @override
+  void initState() {
+    super.initState();
+    getUserData();
+  }
+
+bool isAdmin=false;
   var widgetDecider;
   @override
   Widget build(BuildContext context) {
@@ -220,9 +228,16 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Widget users() {
-    return UsersViewPage();
+    return UsersViewPage(isAdmin : isAdmin);
   }
 
-
-
+  getUserData() async {
+    await Firestore.instance.collection('users').document(widget.user)
+        .get().then((DocumentSnapshot) {
+      setState(() {
+        isAdmin = DocumentSnapshot.data['isAdmin'];
+      });
+    }
+    );
+  }
 }
