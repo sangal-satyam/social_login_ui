@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
 import '../../auth/auth.dart';
@@ -9,7 +8,6 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   String error = '';
@@ -57,9 +55,9 @@ class _RegisterState extends State<Register> {
                           color: Colors.red,
                         ),
                       ),
-
-                      SizedBox(height: 80,),
-
+                      SizedBox(
+                        height: 80,
+                      ),
                       Form(
                         key: _formKey,
                         child: Column(
@@ -68,32 +66,39 @@ class _RegisterState extends State<Register> {
                               decoration: InputDecoration(
                                   labelText: 'Employee Id',
                                   enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.red)),
+                                      borderSide:
+                                          BorderSide(color: Colors.red)),
                                   labelStyle: TextStyle(
-                                      color: Colors.red, fontWeight: FontWeight.bold),
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold),
                                   hintText: 'Employee Id',
+                                  //prefix: Text('MOB'),
+                                  //helperText: 'MOB',
+                                  prefixText: 'MOB',
                                   focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color : Colors.red)
-                                  )
-                              ),
-                              validator: (val) => val.isEmpty ? 'Enter a Employee Id' : null,
+                                      borderSide:
+                                          BorderSide(color: Colors.red))),
+                              validator: (val) =>
+                                  val.isEmpty ? 'Enter a Employee Id' : null,
                               onChanged: (val) {
-                                setState(() => employeeId = val);
+                                setState(() => employeeId = 'MOB' + val);
                               },
                             ),
                             TextFormField(
                               decoration: InputDecoration(
                                   labelText: 'NAME',
                                   enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.red)),
+                                      borderSide:
+                                          BorderSide(color: Colors.red)),
                                   labelStyle: TextStyle(
-                                      color: Colors.red, fontWeight: FontWeight.bold),
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold),
                                   hintText: 'NAME',
                                   focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color : Colors.red)
-                                  )
-                              ),
-                              validator: (val) => val.isEmpty ? 'Enter a Name' : null,
+                                      borderSide:
+                                          BorderSide(color: Colors.red))),
+                              validator: (val) =>
+                                  val.isEmpty ? 'Enter a Name' : null,
                               onChanged: (val) {
                                 setState(() => name = val);
                               },
@@ -105,16 +110,18 @@ class _RegisterState extends State<Register> {
                               decoration: InputDecoration(
                                   labelText: 'AGE',
                                   enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.red)),
+                                      borderSide:
+                                          BorderSide(color: Colors.red)),
                                   labelStyle: TextStyle(
-                                      color: Colors.red, fontWeight: FontWeight.bold),
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold),
                                   hintText: 'AGE',
                                   focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color : Colors.red)
-                                  )
-                              ),
+                                      borderSide:
+                                          BorderSide(color: Colors.red))),
                               keyboardType: TextInputType.number,
-                              validator: (val) => val.isEmpty ? 'Enter Age' : null,
+                              validator: (val) =>
+                                  val.isEmpty ? 'Enter Age' : null,
                               onChanged: (val) {
                                 setState(() => age = int.parse(val));
                               },
@@ -126,15 +133,17 @@ class _RegisterState extends State<Register> {
                               decoration: InputDecoration(
                                   labelText: 'GENDER',
                                   enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.red)),
+                                      borderSide:
+                                          BorderSide(color: Colors.red)),
                                   labelStyle: TextStyle(
-                                      color: Colors.red, fontWeight: FontWeight.bold),
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold),
                                   hintText: 'GENDER',
                                   focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color : Colors.red)
-                                  )
-                              ),
-                              validator: (val) => val.isEmpty ? 'Enter Gender' : null,
+                                      borderSide:
+                                          BorderSide(color: Colors.red))),
+                              validator: (val) =>
+                                  val.isEmpty ? 'Enter Gender' : null,
                               onChanged: (val) {
                                 setState(() => gender = val);
                               },
@@ -146,18 +155,21 @@ class _RegisterState extends State<Register> {
                               decoration: InputDecoration(
                                   labelText: 'MOBILE NUMBER',
                                   enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.red)),
+                                      borderSide:
+                                          BorderSide(color: Colors.red)),
                                   labelStyle: TextStyle(
-                                      color: Colors.red, fontWeight: FontWeight.bold),
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold),
                                   hintText: 'MOBILE NUMBER',
                                   focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color : Colors.red)
-                                  )
-                              ),
+                                      borderSide:
+                                          BorderSide(color: Colors.red))),
                               maxLength: 10,
                               keyboardType: TextInputType.phone,
                               maxLengthEnforced: true,
-                              validator: (val) => val.length!=10 ? 'Enter Mobile Number' : null,
+                              validator: (val) => val.length != 10
+                                  ? 'Enter Mobile Number'
+                                  : null,
                               onChanged: (val) {
                                 setState(() => mobile = int.parse(val));
                               },
@@ -169,16 +181,18 @@ class _RegisterState extends State<Register> {
                               decoration: InputDecoration(
                                   labelText: 'EMAIL ADDRESS',
                                   enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.red)),
+                                      borderSide:
+                                          BorderSide(color: Colors.red)),
                                   labelStyle: TextStyle(
-                                      color: Colors.red, fontWeight: FontWeight.bold),
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold),
                                   hintText: 'EMAIL ADDRESS',
                                   focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color : Colors.red)
-                                  )
-                              ),
+                                      borderSide:
+                                          BorderSide(color: Colors.red))),
                               keyboardType: TextInputType.emailAddress,
-                              validator: (val) => val.isEmpty ? 'Enter an email' : null,
+                              validator: (val) =>
+                                  val.isEmpty ? 'Enter an email' : null,
                               onChanged: (val) {
                                 setState(() => email = val);
                               },
@@ -190,34 +204,44 @@ class _RegisterState extends State<Register> {
                               decoration: InputDecoration(
                                   labelText: 'PASSWORD',
                                   enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.red)),
+                                      borderSide:
+                                          BorderSide(color: Colors.red)),
                                   labelStyle: TextStyle(
-                                      color: Colors.red, fontWeight: FontWeight.bold),
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold),
                                   hintText: 'PASSWORD',
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color : Colors.red),
-                                  )
-                              ),
+                                    borderSide: BorderSide(color: Colors.red),
+                                  )),
                               obscureText: true,
-                              validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
+                              validator: (val) => val.length < 6
+                                  ? 'Enter a password 6+ chars long'
+                                  : null,
                               onChanged: (val) {
-                                setState(() => password= val);
+                                setState(() => password = val);
                               },
                             ),
                             SizedBox(
                               height: 20,
                             ),
-
                             GestureDetector(
                               onTap: () async {
-                                if(_formKey.currentState.validate()){
-                                  dynamic result = await _auth.registerWithEmailAndPassword(email, password,employeeId,name,gender,mobile,age,isAdmin);
-                                  if(result == null) {
+                                if (_formKey.currentState.validate()) {
+                                  dynamic result =
+                                      await _auth.registerWithEmailAndPassword(
+                                          email,
+                                          password,
+                                          employeeId,
+                                          name,
+                                          gender,
+                                          mobile,
+                                          age,
+                                          isAdmin);
+                                  if (result == null) {
                                     setState(() {
                                       error = 'Please supply a valid email';
                                     });
-                                  }
-                                  else{
+                                  } else {
                                     showToast('Registerd Successfully');
                                     Navigator.pop(context);
                                   }
@@ -262,5 +286,4 @@ class _RegisterState extends State<Register> {
   void showToast(String msg, {int duration, int gravity}) {
     Toast.show(msg, context, duration: duration, gravity: gravity);
   }
-
 }

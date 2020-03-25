@@ -1,30 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:loginui/auth/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:loginui/models/user_model.dart';
 
 class AddTodoPage extends StatefulWidget {
-
-final String user;
+  final String user;
 
   const AddTodoPage({Key key, this.user}) : super(key: key);
-
 
   @override
   _AddTodoPageState createState() => _AddTodoPageState();
 }
 
 class _AddTodoPageState extends State<AddTodoPage> {
-
-  final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   String error = '';
 
-  // text field state
   String taskName = '';
   String taskDescription = '';
   String taskDueDate = '';
-
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +42,9 @@ class _AddTodoPageState extends State<AddTodoPage> {
                   padding: const EdgeInsets.all(50),
                   child: Column(
                     children: <Widget>[
-                      SizedBox(height: 80,),
+                      SizedBox(
+                        height: 80,
+                      ),
                       Hero(
                         tag: 1,
                         child: Icon(
@@ -59,9 +53,9 @@ class _AddTodoPageState extends State<AddTodoPage> {
                           color: Colors.red,
                         ),
                       ),
-
-                      SizedBox(height: 100,),
-
+                      SizedBox(
+                        height: 100,
+                      ),
                       Form(
                         key: _formKey,
                         child: Column(
@@ -70,15 +64,17 @@ class _AddTodoPageState extends State<AddTodoPage> {
                               decoration: InputDecoration(
                                   labelText: 'Task Name',
                                   enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.red)),
+                                      borderSide:
+                                          BorderSide(color: Colors.red)),
                                   labelStyle: TextStyle(
-                                      color: Colors.red, fontWeight: FontWeight.bold),
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold),
                                   hintText: 'Task Name',
                                   focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color : Colors.red)
-                                  )
-                              ),
-                              validator: (val) => val.isEmpty ? 'Task Name' : null,
+                                      borderSide:
+                                          BorderSide(color: Colors.red))),
+                              validator: (val) =>
+                                  val.isEmpty ? 'Task Name' : null,
                               onChanged: (val) {
                                 setState(() => taskName = val);
                               },
@@ -90,15 +86,17 @@ class _AddTodoPageState extends State<AddTodoPage> {
                               decoration: InputDecoration(
                                   labelText: 'Task Description',
                                   enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.red)),
+                                      borderSide:
+                                          BorderSide(color: Colors.red)),
                                   labelStyle: TextStyle(
-                                      color: Colors.red, fontWeight: FontWeight.bold),
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold),
                                   hintText: 'Task Description',
                                   focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color : Colors.red)
-                                  )
-                              ),
-                              validator: (val) => val.isEmpty ? 'Enter Task Description' : null,
+                                      borderSide:
+                                          BorderSide(color: Colors.red))),
+                              validator: (val) =>
+                                  val.isEmpty ? 'Enter Task Description' : null,
                               onChanged: (val) {
                                 setState(() => taskDescription = val);
                               },
@@ -110,15 +108,17 @@ class _AddTodoPageState extends State<AddTodoPage> {
                               decoration: InputDecoration(
                                   labelText: 'Task Due Date',
                                   enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.red)),
+                                      borderSide:
+                                          BorderSide(color: Colors.red)),
                                   labelStyle: TextStyle(
-                                      color: Colors.red, fontWeight: FontWeight.bold),
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold),
                                   hintText: 'Task Due Date',
                                   focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color : Colors.red)
-                                  )
-                              ),
-                              validator: (val) => val.isEmpty ? 'Enter Due Date' : null,
+                                      borderSide:
+                                          BorderSide(color: Colors.red))),
+                              validator: (val) =>
+                                  val.isEmpty ? 'Enter Due Date' : null,
                               onChanged: (val) {
                                 setState(() => taskDueDate = val);
                               },
@@ -126,11 +126,20 @@ class _AddTodoPageState extends State<AddTodoPage> {
                             SizedBox(
                               height: 40,
                             ),
-
                             GestureDetector(
                               onTap: () async {
-                                if(_formKey.currentState.validate()){
-                                  Firestore.instance.collection('users').document(widget.user).collection('tasks').document().setData({"taskName": taskName,"taskDescription": taskDescription, "taskDueDate":taskDueDate});
+                                if (_formKey.currentState.validate()) {
+                                  Firestore.instance
+                                      .collection('users')
+                                      .document(widget.user)
+                                      .collection('tasks')
+                                      .document()
+                                      .setData({
+                                    "taskName": taskName,
+                                    "taskDescription": taskDescription,
+                                    "taskDueDate": taskDueDate,
+                                    "taskStatus": 'Due'
+                                  });
                                   Navigator.pop(context);
                                 }
                               },
@@ -168,8 +177,5 @@ class _AddTodoPageState extends State<AddTodoPage> {
         ),
       ),
     );
-
   }
-
-
 }

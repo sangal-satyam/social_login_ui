@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-
-
 class GoogleLogin extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -16,18 +14,18 @@ class _GoogleLoginState extends State<GoogleLogin> {
 
   GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
-  _login() async{
-    try{
+  _login() async {
+    try {
       await _googleSignIn.signIn();
       setState(() {
         _isLoggedIn = true;
       });
-    } catch (err){
+    } catch (err) {
       print(err);
     }
   }
 
-  _logout(){
+  _logout() {
     _googleSignIn.signOut();
     setState(() {
       _isLoggedIn = false;
@@ -42,23 +40,30 @@ class _GoogleLoginState extends State<GoogleLogin> {
         body: Center(
             child: _isLoggedIn
                 ? Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Image.network(_googleSignIn.currentUser.photoUrl, height: 50.0, width: 50.0,),
-                Text(_googleSignIn.currentUser.displayName),
-                OutlineButton( child: Text("Logout"), onPressed: (){
-                  _logout();
-                },)
-              ],
-            )
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Image.network(
+                        _googleSignIn.currentUser.photoUrl,
+                        height: 50.0,
+                        width: 50.0,
+                      ),
+                      Text(_googleSignIn.currentUser.displayName),
+                      OutlineButton(
+                        child: Text("Logout"),
+                        onPressed: () {
+                          _logout();
+                        },
+                      )
+                    ],
+                  )
                 : Center(
-              child: OutlineButton(
-                child: Text("Login with Google"),
-                onPressed: () {
-                  _login();
-                },
-              ),
-            )),
+                    child: OutlineButton(
+                      child: Text("Login with Google"),
+                      onPressed: () {
+                        _login();
+                      },
+                    ),
+                  )),
       ),
     );
   }

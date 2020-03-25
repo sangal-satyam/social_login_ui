@@ -1,40 +1,20 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:loginui/auth/auth.dart';
-import 'package:loginui/screens/dashboard/dashboard.dart';
-//import 'package:loginui/fb_login.dart';
-//import 'package:loginui/google_login.dart';
-import 'package:loginui/screens/logIn/social_login.dart';
 import 'package:toast/toast.dart';
 
-
-
 class LoginPage extends StatefulWidget {
-
-//  final Function fbLogin;
-//  final Function googleLogin;
-//
-//  const LoginPage({Key key, this.fbLogin, this.googleLogin}) : super(key: key);
-
-
-
-
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   final AuthService _auth = AuthService();
 
   // text field state
   String email = '';
   String password = '';
   String error = '';
-
-
-  SocialLogin _socialLogin = SocialLogin();
 
   @override
   Widget build(BuildContext context) {
@@ -68,23 +48,22 @@ class _LoginPageState extends State<LoginPage> {
                         color: Colors.red,
                       ),
                     ),
-
-                    SizedBox(height: 5,),
-
+                    SizedBox(
+                      height: 5,
+                    ),
                     Column(
                       children: <Widget>[
                         TextFormField(
                           decoration: InputDecoration(
-                            labelText: 'USERNAME',
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red)),
-                                labelStyle: TextStyle(
-                                color: Colors.red, fontWeight: FontWeight.bold),
-                            hintText: 'USERNAME',
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color : Colors.red)
-                            )
-                          ),
+                              labelText: 'USERNAME',
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.red)),
+                              labelStyle: TextStyle(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold),
+                              hintText: 'USERNAME',
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.red))),
                           onChanged: (val) {
                             setState(() => email = val);
                           },
@@ -94,18 +73,18 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         TextFormField(
                           decoration: InputDecoration(
-                            labelText: 'PASSWORD',
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red)),
-                            labelStyle: TextStyle(
-                                color: Colors.red, fontWeight: FontWeight.bold),
-                            hintText: 'PASSWORD',
+                              labelText: 'PASSWORD',
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.red)),
+                              labelStyle: TextStyle(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold),
+                              hintText: 'PASSWORD',
                               focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color : Colors.red),
-                              )
-                          ),
+                                borderSide: BorderSide(color: Colors.red),
+                              )),
                           onChanged: (val) {
-                            setState(() => password= val);
+                            setState(() => password = val);
                           },
                         ),
                         SizedBox(
@@ -124,14 +103,13 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         GestureDetector(
                           onTap: () async {
-
-                            dynamic result = await _auth.signInWithEmailPassword(email, password);
-                            if(result == null) {
+                            dynamic result = await _auth
+                                .signInWithEmailPassword(email, password);
+                            if (result == null) {
                               setState(() {
                                 error = 'Please supply a valid email';
                               });
-                            }
-                            else{
+                            } else {
                               showToast('Welcome');
                               Navigator.pop(context);
                             }
@@ -188,16 +166,13 @@ class _LoginPageState extends State<LoginPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-
                             GestureDetector(
                               onTap: () {
+                                // _socialLogin.
 
-                               // _socialLogin.
-
-                               // widget.fbLogin();
+                                // widget.fbLogin();
 
                                 //Navigator.push(context, MaterialPageRoute(builder: (context) => FbLogin()));
-
                               },
                               child: Container(
                                 height: 40,
@@ -214,8 +189,8 @@ class _LoginPageState extends State<LoginPage> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: <Widget>[
-                                    Image.network("https://i.ya-webdesign.com/images/white-page-dividers-png-4.png"),
-
+                                    Image.network(
+                                        "https://i.ya-webdesign.com/images/white-page-dividers-png-4.png"),
                                     Text(
                                       'FACEBOOK',
                                       style: TextStyle(
@@ -226,14 +201,11 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                             ),
-
                             GestureDetector(
                               onTap: () {
-
-                              //  widget.googleLogin();
+                                //  widget.googleLogin();
 
                                 //Navigator.push(context, MaterialPageRoute(builder: (context) => GoogleLogin()));
-
                               },
                               child: Container(
                                 height: 40,
@@ -250,9 +222,11 @@ class _LoginPageState extends State<LoginPage> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: <Widget>[
-                                    SizedBox(width: 10,),
-                                    Image.network("https://www.diag.ai/img/gplus.png"),
-
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Image.network(
+                                        "https://www.diag.ai/img/gplus.png"),
                                     Text(
                                       'GOOGLE',
                                       style: TextStyle(
@@ -267,7 +241,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ],
                     ),
-             ],
+                  ],
                 ),
               ),
             ),
@@ -280,5 +254,4 @@ class _LoginPageState extends State<LoginPage> {
   void showToast(String msg, {int duration, int gravity}) {
     Toast.show(msg, context, duration: duration, gravity: gravity);
   }
-
 }

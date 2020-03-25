@@ -17,8 +17,6 @@ class MyApp extends StatelessWidget {
       ),
     );
 
-
-
 //      MaterialApp(
 //      title: 'Flutter Demo',
 //      theme: ThemeData(
@@ -28,4 +26,3 @@ class MyApp extends StatelessWidget {
 //    );
   }
 }
-

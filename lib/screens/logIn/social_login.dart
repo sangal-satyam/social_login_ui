@@ -7,10 +7,7 @@ import 'package:loginui/models/user_model.dart';
 
 import 'login_page.dart';
 
-
-
 class SocialLogin extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -25,15 +22,14 @@ class _SocialLoginState extends State<SocialLogin> {
   final facebookLogin = FacebookLogin();
   GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
-
-
-  _loginWithFB() async{
+  _loginWithFB() async {
     final result = await facebookLogin.logInWithReadPermissions(['email']);
 
     switch (result.status) {
       case FacebookLoginStatus.loggedIn:
         final token = result.accessToken.token;
-        final graphResponse = await http.get('https://graph.facebook.com/v2.12/me?fields=name,picture,email&access_token=$token');
+        final graphResponse = await http.get(
+            'https://graph.facebook.com/v2.12/me?fields=name,picture,email&access_token=$token');
         final profile = JSON.jsonDecode(graphResponse.body);
         print(profile);
         setState(() {
@@ -45,29 +41,28 @@ class _SocialLoginState extends State<SocialLogin> {
         break;
 
       case FacebookLoginStatus.cancelledByUser:
-        setState(() => _isLoggedIn = false );
+        setState(() => _isLoggedIn = false);
         break;
       case FacebookLoginStatus.error:
-        setState(() => _isLoggedIn = false );
+        setState(() => _isLoggedIn = false);
         break;
     }
-
   }
 
-  _loginWithGoogle() async{
-    try{
+  _loginWithGoogle() async {
+    try {
       await _googleSignIn.signIn();
       setState(() {
         _isLoggedIn = true;
         _userData.profileImage = _googleSignIn.currentUser.photoUrl;
         _userData.name = _googleSignIn.currentUser.displayName;
       });
-    } catch (err){
+    } catch (err) {
       print(err);
     }
   }
 
-  _logout(){
+  _logout() {
     _googleSignIn.signOut();
     facebookLogin.logOut();
     setState(() {
@@ -83,18 +78,24 @@ class _SocialLoginState extends State<SocialLogin> {
         body: Center(
             child: _isLoggedIn
                 ? Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Image.network(_userData.profileImage, height: 50.0, width: 50.0,),
-                Text(_userData.name),
-                OutlineButton( child: Text("Logout"), onPressed: (){
-                  _logout();
-                },)
-              ],
-            )
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Image.network(
+                        _userData.profileImage,
+                        height: 50.0,
+                        width: 50.0,
+                      ),
+                      Text(_userData.name),
+                      OutlineButton(
+                        child: Text("Logout"),
+                        onPressed: () {
+                          _logout();
+                        },
+                      )
+                    ],
+                  )
                 : LoginPage()),
       ),
     );
   }
 }
-
